@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  *	Binary Tree of Comparable values.
  *	The tree only has unique values. It does not add duplicate values.
@@ -56,7 +57,25 @@ public class BinaryTree<E extends Comparable<E>> {
 	/**
 	 *	Print Binary Tree Inorder
 	 */
-	public void printInorder() { }
+	public void printInorder() {
+		ArrayList<TreeNode<E>> nodeList = new ArrayList<TreeNode<E>>();
+		TreeNode<E> temp = root;
+		while(nodeList.size() > 0 || temp != null){
+			while(temp != null){
+				nodeList.add(temp);
+				temp = temp.getLeft();
+			}
+			do{
+				temp = nodeList.get(nodeList.size()-1);
+				nodeList.remove(nodeList.size()-1);
+				System.out.println(temp.getValue() + " ");
+			}while(temp != null && temp.getRight() == null && nodeList.size() >0);
+			
+			temp = temp.getRight();
+		} 
+		
+		
+	}
 	
 	/**
 	 *	Print Binary Tree Preorder
