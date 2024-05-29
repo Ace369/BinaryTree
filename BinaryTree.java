@@ -68,8 +68,8 @@ public class BinaryTree<E extends Comparable<E>> {
 			do{
 				temp = nodeList.get(nodeList.size()-1);
 				nodeList.remove(nodeList.size()-1);
-				System.out.println(temp.getValue() + " ");
-			}while(temp != null && temp.getRight() == null && nodeList.size() >0);
+				System.out.print(temp.getValue() + " ");
+			}while(temp != null && temp.getRight() == null && nodeList.size() > 0);
 			
 			temp = temp.getRight();
 		} 
@@ -80,12 +80,48 @@ public class BinaryTree<E extends Comparable<E>> {
 	/**
 	 *	Print Binary Tree Preorder
 	 */
-	public void printPreorder() { }
+	public void printPreorder() {
+		ArrayList<TreeNode<E>> nodeList = new ArrayList<TreeNode<E>>();
+		TreeNode<E> temp = root;
+		while(nodeList.size() > 0 || temp != null){
+			while(temp != null){
+				System.out.print(temp.getValue() + " ");
+				nodeList.add(temp);
+				temp = temp.getLeft();
+			}
+			do{
+				temp = nodeList.get(nodeList.size()-1);
+				nodeList.remove(nodeList.size()-1);
+			}while(temp != null && temp.getRight() == null && nodeList.size() > 0);
+			
+			temp = temp.getRight();
+		}
+	}
 	
 	/**
 	 *	Print Binary Tree Postorder
 	 */
-	public void printPostorder() { }
+	public void printPostorder() {
+		ArrayList<TreeNode<E>> nodeList = new ArrayList<TreeNode<E>>();
+		TreeNode<E> temp = root;
+		nodeList.add(temp);
+		while(nodeList.get(nodeList.size()-1) == temp && temp != null){
+			nodeList.add(temp);
+			if(temp.getLeft() != null && nodeList.get(nodeList.size()-1) == temp.getLeft()){
+				temp = temp.getLeft();
+			}
+			else if(temp.getRight() != null && nodeList.get(nodeList.size()-1) == temp.getRight()){
+				temp = temp.getRight();
+			}
+			else{
+				temp = nodeList.get(nodeList.size()-1);
+				nodeList.remove(nodeList.size()-1);
+				System.out.print(temp.getValue() + " ");
+				
+
+			}
+		}
+	}
 		
 	/**	Return a balanced version of this binary tree
 	 *	@return		the balanced tree
